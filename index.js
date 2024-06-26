@@ -1,6 +1,7 @@
 // index.js
 
 const express = require('express');
+const cors = require('cors')
 const axios = require('axios');
 require('dotenv').config(); // For loading environment variables
 
@@ -9,7 +10,7 @@ const port = process.env.PORT || 8081; // Choose your desired port
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
-
+app.use(cors());
 // POST endpoint to proxy data to HubSpot API
 app.post('/post-to-hubspot', async (req, res) => {
     try {
@@ -38,5 +39,5 @@ app.post('/post-to-hubspot', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`HubSpot proxy server listening at port ${port}`);
+    console.log(`HubSpot proxy server listening at http://localhost:${port}`);
 });
