@@ -39,15 +39,16 @@ app.post('/post-to-hubspot', async (req, res) => {
 
 app.patch('/abandon-cart', async (req, res) => {
     console.log(req.query.email)
-    const apiURL = `https://api.hubapi.com/crm/v3/objects/contacts/${req.query.email}?idProperty=email`
-    res.send(apiURL)
+    
 
     try {
+        const apiURL = `https://api.hubapi.com/crm/v3/objects/contacts/${req.query.email}?idProperty=email`
+
         // Example HubSpot API key from environment variables
         const apiKey = process.env.HUBSPOT_API_KEY;
 
         // Make a POST request to HubSpot's API
-        const response = await axios.post(apiUrl, req.body, {
+        const response = await axios.post(apiURL, req.body, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`,
                 'Content-Type': 'application/json'
