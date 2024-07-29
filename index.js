@@ -42,11 +42,12 @@ app.patch('/abandon-cart', async (req, res) => {
     
 
     try {
-        const apiURL = `https://api.hubapi.com/crm/v3/objects/contacts/${req.query.email}?idProperty=email`
+        let apiURL = `https://api.hubapi.com/crm/v3/objects/contacts/${req.query.email}?idProperty=email`
 
         // Example HubSpot API key from environment variables
         const apiKey = process.env.HUBSPOT_API_KEY;
-
+        console.log(req.body)
+        console.log(apiURL)
         // Make a POST request to HubSpot's API
         const response = await axios.patch(apiURL, req.body, {
             headers: {
