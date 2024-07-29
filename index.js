@@ -48,7 +48,7 @@ app.patch('/abandon-cart', async (req, res) => {
         const apiKey = process.env.HUBSPOT_API_KEY;
 
         // Make a POST request to HubSpot's API
-        const response = await axios.post(apiURL, req.body, {
+        const response = await axios.patch(apiURL, req.body, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`,
                 'Content-Type': 'application/json'
