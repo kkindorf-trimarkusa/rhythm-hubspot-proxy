@@ -37,6 +37,33 @@ app.post('/post-to-hubspot', async (req, res) => {
     }
 });
 
+app.patch('/abandon-cart', async (req, res) => {
+    console.log(req.query.email)
+    const apiURL = `https://api.hubapi.com/crm/v3/objects/contacts/${req.query.email}?idProperty=email`
+    res.send(apiURL)
+
+    try {
+        // Example HubSpot API key from environment variables
+        const apiKey = process.env.HUBSPOT_API_KEY;
+
+        // Make a POST request to HubSpot's API
+        const response = await axios.post(apiUrl, req.body, {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Return the response from HubSpot's API
+        res.json(response.data);
+    } catch (error) {
+        // Handle errors
+        console.error('Error posting to HubSpot:', error.message);
+        res.status(error.response ? error.response.status : 500).json({ error: error.message });
+    }
+ 
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`HubSpot proxy server listening at http://localhost:${port}`);
