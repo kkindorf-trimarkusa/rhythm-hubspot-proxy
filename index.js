@@ -66,6 +66,11 @@ app.patch('/abandon-cart', async (req, res) => {
  
 });
 
+app.get('/health', (req, res) => {
+    // You can add more comprehensive checks here if needed
+    res.status(200).send('OK'); 
+  });
+
 // Start the server
 app.listen(port, () => {
     console.log(`HubSpot proxy server listening at http://localhost:${port}`);
